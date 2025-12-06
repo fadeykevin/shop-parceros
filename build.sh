@@ -21,9 +21,10 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 if not User.objects.filter(username='admin').exists():
     User.objects.create_superuser('admin', 'admin@shop.com', 'admin123')
+    print('✅ Superuser created')
 END
 
 echo "🛍️ Creating sample products..."
 python manage.py create_products
 
-echo "✅ Build completed"
+echo "✅ Build completed successfully"
