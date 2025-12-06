@@ -88,3 +88,6 @@ SIMPLE_JWT = {
 }
 
 INTERNAL_IPS = ['127.0.0.1']
+
+# Static files configuration
+STATICFILES_DIRS = [BASE_DIR / 'static']
