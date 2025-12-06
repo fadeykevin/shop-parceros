@@ -1,5 +1,5 @@
 // ============================================
-// SHOP PARCEROS - JAVASCRIPT
+// SHOP PARCEROS - JAVASCRIPT CORREGIDO
 // ============================================
 
 const API_URL = 'http://127.0.0.1:8000/api';
@@ -68,10 +68,12 @@ async function handleLogin(e) {
             localStorage.setItem('currentUser', username);
             
             showAlert('¡Bienvenido ' + username + '!', 'success');
-            bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
+            
+            const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+            if (loginModal) loginModal.hide();
             
             updateAuthUI();
-            loadCart();
+            await loadCart();
         } else {
             showAlert('Usuario o contraseña incorrectos', 'danger');
         }
@@ -218,7 +220,7 @@ async function addToCart(productId, productName, productPrice) {
         
         if (response.ok) {
             showAlert(`${productName} agregado al carrito`, 'success');
-            loadCart();
+            await loadCart();
         } else {
             const data = await response.json();
             showAlert(data.error || 'Error al agregar al carrito', 'danger');
@@ -287,6 +289,9 @@ function showCart() {
     new bootstrap.Modal(document.getElementById('cartModal')).show();
 }
 
+// ============================================
+// FUNCIÓN CORREGIDA: removeFromCart
+// ============================================
 async function removeFromCart(itemId) {
     try {
         const response = await fetch(`${API_URL}/cart/remove/${itemId}/`, {
@@ -296,8 +301,20 @@ async function removeFromCart(itemId) {
         
         if (response.ok) {
             showAlert('Producto eliminado del carrito', 'success');
-            loadCart();
-            showCart();
+            
+            // Esperar a que se actualice el carrito
+            await loadCart();
+            
+            // Cerrar el modal actual
+            const cartModal = bootstrap.Modal.getInstance(document.getElementById('cartModal'));
+            if (cartModal) {
+                cartModal.hide();
+            }
+            
+            // Esperar un poco y volver a abrir con datos actualizados
+            setTimeout(() => {
+                showCart();
+            }, 300);
         }
     } catch (error) {
         showAlert('Error al eliminar del carrito', 'danger');
@@ -325,7 +342,9 @@ function showCheckout() {
     
     document.getElementById('totalAmount').textContent = `$${total.toFixed(2)}`;
     
-    bootstrap.Modal.getInstance(document.getElementById('cartModal')).hide();
+    const cartModal = bootstrap.Modal.getInstance(document.getElementById('cartModal'));
+    if (cartModal) cartModal.hide();
+    
     new bootstrap.Modal(document.getElementById('checkoutModal')).show();
 }
 
@@ -349,11 +368,11 @@ async function handleCheckout(e) {
             
             showAlert(`¡Pedido #${order.id} creado exitosamente! Total: $${parseFloat(order.total).toFixed(2)}`, 'success');
             
-            bootstrap.Modal.getInstance(document.getElementById('checkoutModal')).hide();
+            const checkoutModal = bootstrap.Modal.getInstance(document.getElementById('checkoutModal'));
+            if (checkoutModal) checkoutModal.hide();
             
-            // Limpiar carrito
-            cartItems = [];
-            updateCartCount();
+            // Recargar el carrito desde el servidor
+            await loadCart();
             
             // Limpiar formulario
             document.getElementById('checkoutForm').reset();
