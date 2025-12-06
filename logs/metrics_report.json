@@ -1,0 +1,39 @@
+{
+  "periodo": "2025-12",
+  "kpis": {
+    "tiempo_carga_promedio": 2.14,
+    "tasa_conversion": 7.94,
+    "tasa_rebote": 45.53,
+    "productos_mas_vistos": [
+      {
+        "nombre": "Laptop HP Pavilion",
+        "vistas": 454
+      },
+      {
+        "nombre": "Mouse Logitech MX Master 3",
+        "vistas": 348
+      },
+      {
+        "nombre": "Teclado Mecánico Razer",
+        "vistas": 219
+      }
+    ],
+    "picos_trafico": {
+      "hora_maxima": "14:00",
+      "usuarios_simultaneos": 124
+    }
+  },
+  "analisis": {
+    "fortalezas": [
+      "Tiempo de carga aceptable en móviles",
+      "Alta interacción con ofertas",
+      "Buen engagement en productos gaming"
+    ],
+    "areas_mejora": [
+      "Optimizar imágenes (reducir tamaño 40%)",
+      "Implementar lazy loading",
+      "Cachear respuestas API",
+      "Mejorar checkout (3 pasos → 2 pasos)"
+    ]
+  }
+}

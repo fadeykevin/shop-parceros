@@ -361,6 +361,30 @@ body {
     position: relative;
 }
 
+.product-image-real {
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-image-real::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 57, 166, 0.1), rgba(213, 43, 30, 0.1));
+    transition: all 0.3s ease;
+}
+
+.product-card-new:hover .product-image-real::before {
+    background: linear-gradient(135deg, rgba(0, 57, 166, 0.3), rgba(213, 43, 30, 0.3));
+}
+
 .product-badge-low {
     position: absolute;
     top: 10px;
@@ -505,6 +529,30 @@ body {
     justify-content: center;
     font-size: 4.5rem;
     color: white;
+}
+
+.offer-image-real {
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+.offer-image-real::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.2));
+    transition: all 0.3s ease;
+}
+
+.offer-card:hover .offer-image-real::before {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.4), rgba(220, 38, 38, 0.4));
 }
 
 .offer-body {

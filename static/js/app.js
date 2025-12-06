@@ -1,5 +1,5 @@
 // ============================================
-// SHOP PARCEROS - JAVASCRIPT COMPLETO
+// SHOP PARCEROS - JAVASCRIPT CON IMÁGENES REALES
 // ============================================
 
 const API_URL = 'http://127.0.0.1:8000/api';
@@ -8,27 +8,41 @@ let currentUser = localStorage.getItem('currentUser');
 let cartItems = [];
 
 // ============================================
-// MAPEO DE ICONOS POR PRODUCTO
+// MAPEO DE IMÁGENES REALES POR PRODUCTO
 // ============================================
-const productIcons = {
-    'Laptop': 'fa-laptop',
-    'MacBook': 'fa-laptop-code',
-    'Mouse': 'fa-computer-mouse',
-    'Teclado': 'fa-keyboard',
-    'Monitor': 'fa-desktop',
-    'SSD': 'fa-hard-drive',
-    'Disco': 'fa-hdd',
-    'Pendrive': 'fa-usb-drive',
-    'Audífonos': 'fa-headphones',
-    'Parlante': 'fa-volume-high',
-    'Micrófono': 'fa-microphone',
-    'Webcam': 'fa-video',
-    'Consola': 'fa-gamepad',
-    'Control': 'fa-gamepad',
-    'Silla': 'fa-chair',
-    'Hub': 'fa-plug',
-    'Cable': 'fa-link',
-    'Combo': 'fa-box'
+const productImages = {
+    'HP Pavilion': 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500',
+    'MacBook': 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500',
+    'Lenovo': 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=500',
+    'Dell': 'https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?w=500',
+    'ASUS': 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500',
+    'Acer': 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500',
+    'Mouse Logitech MX': 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500',
+    'Teclado Mecánico': 'https://images.unsplash.com/photo-1595225476474-87563907a212?w=500',
+    'Mouse Gamer Razer': 'https://images.unsplash.com/photo-1610821672523-5d00ff6b0a8b?w=500',
+    'Teclado Logitech K380': 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500',
+    'Combo Teclado': 'https://images.unsplash.com/photo-1587302525834-1b9f06eb6d5a?w=500',
+    'Mouse Pad': 'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500',
+    'Webcam Logitech C920': 'https://images.unsplash.com/photo-1585241645927-c7a8e5840c42?w=500',
+    'Webcam 4K Razer': 'https://images.unsplash.com/photo-1614624532983-4ce03382d63d?w=500',
+    'Monitor Samsung': 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500',
+    'Monitor LG': 'https://images.unsplash.com/photo-1585792180666-f7347c490ee2?w=500',
+    'Monitor Gamer ASUS': 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=500',
+    'Monitor Dell': 'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=500',
+    'SSD Kingston': 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=500',
+    'Disco Duro': 'https://images.unsplash.com/photo-1531492746076-161ca9bcad58?w=500',
+    'SSD Samsung': 'https://images.unsplash.com/photo-1551058622-6f90b2331738?w=500',
+    'Pendrive': 'https://images.unsplash.com/photo-1624823183493-ed5832f48f18?w=500',
+    'Sony WH-1000XM5': 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500',
+    'HyperX Cloud': 'https://images.unsplash.com/photo-1599669454699-248893623440?w=500',
+    'JBL Flip': 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500',
+    'Micrófono Blue Yeti': 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500',
+    'PlayStation 5': 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=500',
+    'Control Xbox': 'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=500',
+    'Silla Gamer': 'https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=500',
+    'Volante Logitech': 'https://images.unsplash.com/photo-1625948515291-69613efd103f?w=500',
+    'Hub USB-C': 'https://images.unsplash.com/photo-1625948515291-69613efd103f?w=500',
+    'Cable HDMI': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500'
 };
 
 // ============================================
@@ -162,13 +176,13 @@ function updateAuthUI() {
 // ============================================
 // UTILIDADES
 // ============================================
-function getProductIcon(productName) {
-    for (let [key, icon] of Object.entries(productIcons)) {
+function getProductImage(productName) {
+    for (let [key, imageUrl] of Object.entries(productImages)) {
         if (productName.includes(key)) {
-            return icon;
+            return imageUrl;
         }
     }
-    return 'fa-box';
+    return 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500';
 }
 
 function formatPrice(price) {
@@ -182,15 +196,15 @@ function formatPrice(price) {
 function getProductCategory(productName) {
     const name = productName.toLowerCase();
     if (name.includes('laptop') || name.includes('macbook')) return 'laptop';
-    if (name.includes('mouse') || name.includes('teclado') || name.includes('combo')) return 'periférico';
+    if (name.includes('mouse') || name.includes('teclado') || name.includes('combo') || name.includes('webcam')) return 'periférico';
     if (name.includes('monitor')) return 'monitor';
     if (name.includes('audífonos') || name.includes('parlante') || name.includes('micrófono')) return 'audio';
-    if (name.includes('consola') || name.includes('control') || name.includes('silla')) return 'gaming';
+    if (name.includes('consola') || name.includes('control') || name.includes('silla') || name.includes('volante')) return 'gaming';
     return 'otro';
 }
 
 // ============================================
-// PRODUCTOS
+// PRODUCTOS CON IMÁGENES REALES
 // ============================================
 async function loadProducts() {
     try {
@@ -215,14 +229,13 @@ function displayProducts(products) {
     }
     
     container.innerHTML = products.map(product => {
-        const icon = getProductIcon(product.name);
+        const imageUrl = getProductImage(product.name);
         const category = getProductCategory(product.name);
         
         return `
         <div class="col-lg-3 col-md-4 col-sm-6 mb-4 product-item" data-category="${category}">
             <div class="product-card-new">
-                <div class="product-image-new">
-                    <i class="fas ${icon}"></i>
+                <div class="product-image-real" style="background-image: url('${imageUrl}');">
                     ${product.stock < 10 ? '<div class="product-badge-low">¡Últimas unidades!</div>' : ''}
                 </div>
                 <div class="product-body-new">
@@ -247,31 +260,33 @@ function displayProducts(products) {
 }
 
 // ============================================
-// OFERTAS
+// OFERTAS CON IMÁGENES REALES
 // ============================================
 function loadOffers(products) {
     const container = document.getElementById('offersContainer');
     
-    // Seleccionar 10 productos al azar para ofertas
     const shuffled = [...products].sort(() => 0.5 - Math.random());
     const offers = shuffled.slice(0, Math.min(10, products.length));
     
+    if (offers.length === 0) {
+        container.innerHTML = '<div class="col-12"><p class="text-center text-white">No hay ofertas disponibles</p></div>';
+        return;
+    }
+    
     container.innerHTML = offers.map(product => {
-        const icon = getProductIcon(product.name);
+        const imageUrl = getProductImage(product.name);
         const originalPrice = parseFloat(product.price);
-        const discount = Math.floor(Math.random() * 31) + 20; // 20-50% descuento
+        const discount = Math.floor(Math.random() * 31) + 20;
         const salePrice = Math.floor(originalPrice * (1 - discount / 100));
         
         return `
         <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
             <div class="offer-card">
                 <div class="offer-badge">${discount}% OFF</div>
-                <div class="offer-image">
-                    <i class="fas ${icon}"></i>
-                </div>
+                <div class="offer-image-real" style="background-image: url('${imageUrl}');"></div>
                 <div class="offer-body">
                     <h5 class="offer-title">${product.name}</h5>
-                    <p class="offer-description">${product.description}</p>
+                    <p class="offer-description">${product.description.substring(0, 100)}${product.description.length > 100 ? '...' : ''}</p>
                     <div class="offer-prices">
                         <span class="offer-price-old">${formatPrice(originalPrice)}</span>
                         <span class="offer-price-new">${formatPrice(salePrice)}</span>
@@ -280,8 +295,9 @@ function loadOffers(products) {
                         <i class="fas fa-fire text-danger"></i> Solo ${product.stock} disponibles
                     </div>
                     <button class="btn btn-offer w-100" 
-                        onclick="addToCart(${product.id}, '${product.name.replace(/'/g, "\\'")}', ${product.price})">
-                        <i class="fas fa-bolt me-2"></i> ¡Comprar Ahora!
+                        onclick="addToCart(${product.id}, '${product.name.replace(/'/g, "\\'")}', ${product.price})"
+                        ${product.stock === 0 ? 'disabled' : ''}>
+                        <i class="fas fa-bolt me-2"></i> ${product.stock === 0 ? 'Agotado' : '¡Comprar Ahora!'}
                     </button>
                 </div>
             </div>
