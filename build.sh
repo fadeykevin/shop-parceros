@@ -4,8 +4,12 @@ set -o errexit
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# Crear directorio de estáticos si no existe
+# Crear directorios necesarios
 mkdir -p staticfiles
+mkdir -p media
 
-# Collectstatic sin validación
+# Collect static files
 python manage.py collectstatic --no-input --clear
+
+# Run migrations
+python manage.py migrate --no-input
