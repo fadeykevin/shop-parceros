@@ -1,23 +1,29 @@
 ﻿#!/usr/bin/env bash
 set -o errexit
 
+echo "📦 Installing dependencies..."
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# Crear directorios necesarios
-mkdir -p staticfiles
-mkdir -p media
+echo "📁 Creating directories..."
+mkdir -p staticfiles media
 
-# Collect static files
-python manage.py collectstatic --no-input --clear
-
-# Run migrations
+echo "🗄️ Running migrations..."
+python manage.py makemigrations --no-input
 python manage.py migrate --no-input
 
-# Create superuser if it doesn't exist
-echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(username='admin').exists() or User.objects.create_superuser('admin', 'admin@shop.com', 'admin123')" | python manage.py shell
+echo "🎨 Collecting static files..."
+python manage.py collectstatic --no-input --clear
 
-# Load initial data if exists
-if [ -f "tienda/fixtures/initial_data.json" ]; then
-    python manage.py loaddata tienda/fixtures/initial_data.json
-fi
+echo "👤 Creating superuser..."
+python manage.py shell << END
+from django.contrib.auth import get_user_model
+User = get_user_model()
+if not User.objects.filter(username='admin').exists():
+    User.objects.create_superuser('admin', 'admin@shop.com', 'admin123')
+END
+
+echo "🛍️ Creating sample products..."
+python manage.py create_products
+
+echo "✅ Build completed"
