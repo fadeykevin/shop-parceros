@@ -1,0 +1,10 @@
+﻿venv/
+*.pyc
+__pycache__/
+db.sqlite3
+*.log
+.env
+media/
+staticfiles/
+*.swp
+.DS_Store
