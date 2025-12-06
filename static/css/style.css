@@ -1,5 +1,5 @@
 ﻿/* ============================================
-   SHOP PARCEROS - ESTILOS PROFESIONALES
+   SHOP PARCEROS - DISEÑO COLOMBIANO MEJORADO
    ============================================ */
 
 :root {
@@ -9,6 +9,9 @@
     --danger: #ef4444;
     --dark: #1f2937;
     --light: #f3f4f6;
+    --colombia-amarillo: #FCD116;
+    --colombia-azul: #003893;
+    --colombia-rojo: #CE1126;
 }
 
 * {
@@ -19,92 +22,127 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    background-attachment: fixed;
+    background: #f8f9fa;
     min-height: 100vh;
 }
 
 /* ============================================
-   NAVBAR
+   NAVBAR MEJORADO
    ============================================ */
-.navbar {
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+.navbar-mejorado {
+    background: rgba(0, 0, 0, 0.9) !important;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    padding: 1rem 0;
     transition: all 0.3s ease;
 }
 
 .navbar-brand {
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: white !important;
     transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.brand-text {
+    background: linear-gradient(135deg, var(--colombia-amarillo), var(--colombia-rojo));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bandera-colombia {
+    font-size: 2rem;
+    animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(15deg); }
+    75% { transform: rotate(-15deg); }
 }
 
 .navbar-brand:hover {
     transform: scale(1.05);
 }
 
-.nav-link {
+.nav-link-custom {
     color: rgba(255, 255, 255, 0.9) !important;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    position: relative;
-}
-
-.nav-link:hover {
-    color: white !important;
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: white;
+    font-weight: 600;
+    font-size: 1.1rem;
     transition: all 0.3s ease;
-    transform: translateX(-50%);
+    padding: 0.5rem 1rem !important;
+    border-radius: 8px;
 }
 
-.nav-link:hover::after {
-    width: 80%;
+.nav-link-custom:hover {
+    color: var(--colombia-amarillo) !important;
+    background: rgba(252, 209, 22, 0.1);
 }
 
-.badge {
+.cart-badge {
     position: absolute;
     top: -5px;
-    right: -10px;
+    right: -5px;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.btn-login {
+    background: linear-gradient(135deg, var(--colombia-amarillo), var(--colombia-rojo));
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(252, 209, 22, 0.4);
+}
+
+.btn-logout {
+    background: var(--danger);
+    border: none;
+    color: white;
+    border-radius: 20px;
+    padding: 0.4rem 1rem;
 }
 
 /* ============================================
-   HERO SECTION
+   HERO SECTION COLOMBIANO
    ============================================ */
-.hero {
+.hero-colombia {
     height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-.hero::before {
-    content: '';
+.hero-image {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
-    animation: float 20s linear infinite;
+    background-image: url('https://images.unsplash.com/photo-1568632234157-ce7aecd03d0d?w=1920');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    animation: zoomIn 20s ease-in-out infinite alternate;
 }
 
-@keyframes float {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-100px); }
+@keyframes zoomIn {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
 }
 
 .hero-overlay {
@@ -113,7 +151,10 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(252, 209, 22, 0.3) 0%, 
+        rgba(0, 56, 147, 0.5) 50%, 
+        rgba(206, 17, 38, 0.3) 100%);
 }
 
 .hero-content {
@@ -121,14 +162,90 @@ body {
     z-index: 2;
     text-align: center;
     color: white;
+    max-width: 900px;
 }
 
-.hero-content h1 {
+.hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.hero-title {
+    font-size: 4rem;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.hero-content p {
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+.btn-hero {
+    background: linear-gradient(135deg, var(--colombia-amarillo) 0%, var(--colombia-rojo) 100%);
+    border: none;
+    color: white;
+    font-weight: 700;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.btn-hero:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(252, 209, 22, 0.5);
+}
+
+.btn-hero-outline {
+    background: transparent;
+    border: 3px solid white;
+    color: white;
+    font-weight: 700;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.btn-hero-outline:hover {
+    background: white;
+    color: var(--primary);
+    transform: translateY(-5px);
+}
+
+.hero-features {
+    margin-top: 4rem;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-5px);
+}
+
+.feature-card h5 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
 }
 
 /* ============================================
@@ -149,7 +266,7 @@ body {
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -162,10 +279,10 @@ body {
         transform: translateY(0);
     }
     40% {
-        transform: translateY(-10px);
+        transform: translateY(-15px);
     }
     60% {
-        transform: translateY(-5px);
+        transform: translateY(-7px);
     }
 }
 
@@ -180,62 +297,66 @@ body {
     z-index: 3;
 }
 
-#productos h2 {
-    color: var(--primary);
-    font-weight: 700;
-}
-
 .product-card {
     background: white;
-    border-radius: 15px;
+    border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     margin-bottom: 30px;
+    border: 2px solid transparent;
 }
 
 .product-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
+    border-color: var(--colombia-amarillo);
 }
 
 .product-image {
-    height: 250px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    height: 280px;
+    background: linear-gradient(135deg, 
+        var(--colombia-amarillo) 0%, 
+        var(--colombia-azul) 50%,
+        var(--colombia-rojo) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 4rem;
+    font-size: 5rem;
     color: white;
 }
 
 .product-body {
-    padding: 20px;
+    padding: 1.5rem;
 }
 
 .product-title {
     font-weight: 700;
     color: var(--dark);
     margin-bottom: 10px;
+    font-size: 1.3rem;
 }
 
 .product-description {
     color: #6b7280;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     margin-bottom: 15px;
 }
 
 .product-price {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 700;
-    color: var(--primary);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-bottom: 15px;
 }
 
 .product-stock {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--success);
     margin-bottom: 15px;
+    font-weight: 600;
 }
 
 .btn-add-cart {
@@ -243,21 +364,22 @@ body {
     border: none;
     color: white;
     font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 25px;
+    padding: 12px 25px;
+    border-radius: 30px;
     transition: all 0.3s ease;
+    font-size: 1rem;
 }
 
 .btn-add-cart:hover {
     transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
 }
 
 /* ============================================
    MODALES
    ============================================ */
 .modal-content {
-    border-radius: 20px;
+    border-radius: 25px;
     border: none;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
@@ -265,11 +387,13 @@ body {
 .modal-header {
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     color: white;
-    border-radius: 20px 20px 0 0;
+    border-radius: 25px 25px 0 0;
+    padding: 1.5rem;
 }
 
 .modal-title {
     font-weight: 700;
+    font-size: 1.5rem;
 }
 
 .form-control:focus {
@@ -288,8 +412,8 @@ body {
    ============================================ */
 .cart-item {
     background: var(--light);
-    border-radius: 10px;
-    padding: 15px;
+    border-radius: 15px;
+    padding: 1.5rem;
     margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
@@ -305,19 +429,20 @@ body {
 .cart-item-info h5 {
     color: var(--dark);
     margin-bottom: 5px;
+    font-weight: 700;
 }
 
 .cart-item-price {
     color: var(--primary);
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 }
 
 .cart-total {
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     color: white;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 1.5rem;
+    border-radius: 15px;
     text-align: center;
     margin-top: 20px;
 }
@@ -325,6 +450,7 @@ body {
 .cart-total h4 {
     margin: 0;
     font-weight: 700;
+    font-size: 1.8rem;
 }
 
 /* ============================================
@@ -365,24 +491,37 @@ footer {
 }
 
 footer a:hover {
-    color: var(--primary) !important;
+    color: var(--colombia-amarillo) !important;
 }
 
 /* ============================================
    RESPONSIVE
    ============================================ */
 @media (max-width: 768px) {
-    .hero {
-        height: 70vh;
+    .hero-colombia {
+        height: 80vh;
     }
     
-    .hero-content h1 {
-        font-size: 2rem;
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .btn-hero {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
     }
     
     .product-image {
-        height: 200px;
-        font-size: 3rem;
+        height: 220px;
+        font-size: 3.5rem;
+    }
+    
+    .bandera-colombia {
+        font-size: 1.5rem;
     }
 }
 
@@ -406,5 +545,10 @@ footer a:hover {
 
 .alert-info {
     background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, var(--colombia-amarillo) 0%, #f59e0b 100%);
     color: white;
 }
