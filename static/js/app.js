@@ -1,14 +1,14 @@
-// ============================================
+﻿// ============================================
 // SHOP PARCEROS - JAVASCRIPT CORREGIDO
 // ============================================
 
-const API_URL = 'http://127.0.0.1:8000/api';
+const API_URL = 'https://shop-parceros-production.up.railway.app/api';
 let authToken = localStorage.getItem('authToken');
 let currentUser = localStorage.getItem('currentUser');
 let cartItems = [];
 
 // ============================================
-// MAPEO DE IMÁGENES REALES POR PRODUCTO
+// MAPEO DE IMÃGENES REALES POR PRODUCTO
 // ============================================
 const productImages = {
     'HP Pavilion': 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500',
@@ -18,7 +18,7 @@ const productImages = {
     'ASUS': 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500',
     'Acer': 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500',
     'Mouse Logitech MX': 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500',
-    'Teclado Mecánico': 'https://images.unsplash.com/photo-1595225476474-87563907a212?w=500',
+    'Teclado MecÃ¡nico': 'https://images.unsplash.com/photo-1595225476474-87563907a212?w=500',
     'Mouse Gamer Razer': 'https://images.unsplash.com/photo-1610821672523-5d00ff6b0a8b?w=500',
     'Teclado Logitech K380': 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500',
     'Combo Teclado': 'https://images.unsplash.com/photo-1587302525834-1b9f06eb6d5a?w=500',
@@ -36,7 +36,7 @@ const productImages = {
     'Sony WH-1000XM5': 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500',
     'HyperX Cloud': 'https://images.unsplash.com/photo-1599669454699-248893623440?w=500',
     'JBL Flip': 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500',
-    'Micrófono Blue Yeti': 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500',
+    'MicrÃ³fono Blue Yeti': 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500',
     'PlayStation 5': 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=500',
     'Control Xbox': 'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=500',
     'Silla Gamer': 'https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=500',
@@ -46,7 +46,7 @@ const productImages = {
 };
 
 // ============================================
-// INICIALIZACIÓN
+// INICIALIZACIÃ“N
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
@@ -71,7 +71,7 @@ function setupEventListeners() {
 }
 
 // ============================================
-// AUTENTICACIÓN
+// AUTENTICACIÃ“N
 // ============================================
 async function handleLogin(e) {
     e.preventDefault();
@@ -94,7 +94,7 @@ async function handleLogin(e) {
             localStorage.setItem('authToken', authToken);
             localStorage.setItem('currentUser', username);
             
-            showAlert('¡Bienvenido ' + username + '!', 'success');
+            showAlert('Â¡Bienvenido ' + username + '!', 'success');
             
             const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
             if (loginModal) loginModal.hide();
@@ -102,10 +102,10 @@ async function handleLogin(e) {
             updateAuthUI();
             await loadCart();
         } else {
-            showAlert('Usuario o contraseña incorrectos', 'danger');
+            showAlert('Usuario o contraseÃ±a incorrectos', 'danger');
         }
     } catch (error) {
-        showAlert('Error al iniciar sesión', 'danger');
+        showAlert('Error al iniciar sesiÃ³n', 'danger');
         console.error(error);
     }
 }
@@ -119,7 +119,7 @@ async function handleRegister(e) {
     const password2 = document.getElementById('regPassword2').value;
     
     if (password !== password2) {
-        showAlert('Las contraseñas no coinciden', 'danger');
+        showAlert('Las contraseÃ±as no coinciden', 'danger');
         return;
     }
     
@@ -131,7 +131,7 @@ async function handleRegister(e) {
         });
         
         if (response.ok) {
-            showAlert('¡Registro exitoso! Ahora puedes iniciar sesión', 'success');
+            showAlert('Â¡Registro exitoso! Ahora puedes iniciar sesiÃ³n', 'success');
             document.querySelector('[href="#loginTab"]').click();
             document.getElementById('registerForm').reset();
         } else {
@@ -155,7 +155,7 @@ function handleLogout() {
     updateAuthUI();
     updateCartCount();
     
-    showAlert('Sesión cerrada correctamente', 'info');
+    showAlert('SesiÃ³n cerrada correctamente', 'info');
 }
 
 function updateAuthUI() {
@@ -196,9 +196,9 @@ function formatPrice(price) {
 function getProductCategory(productName) {
     const name = productName.toLowerCase();
     if (name.includes('laptop') || name.includes('macbook')) return 'laptop';
-    if (name.includes('mouse') || name.includes('teclado') || name.includes('combo') || name.includes('webcam')) return 'periférico';
+    if (name.includes('mouse') || name.includes('teclado') || name.includes('combo') || name.includes('webcam')) return 'perifÃ©rico';
     if (name.includes('monitor')) return 'monitor';
-    if (name.includes('audífonos') || name.includes('parlante') || name.includes('micrófono')) return 'audio';
+    if (name.includes('audÃ­fonos') || name.includes('parlante') || name.includes('micrÃ³fono')) return 'audio';
     if (name.includes('consola') || name.includes('control') || name.includes('silla') || name.includes('volante')) return 'gaming';
     return 'otro';
 }
@@ -216,7 +216,7 @@ async function loadProducts() {
         
         if (!Array.isArray(products)) {
             console.error('La respuesta no es un array:', data);
-            throw new Error('Formato de respuesta inválido');
+            throw new Error('Formato de respuesta invÃ¡lido');
         }
         
         displayProducts(products);
@@ -244,7 +244,7 @@ function displayProducts(products) {
         <div class="col-lg-3 col-md-4 col-sm-6 mb-4 product-item" data-category="${category}">
             <div class="product-card-new">
                 <div class="product-image-real" style="background-image: url('${imageUrl}');">
-                    ${product.stock < 10 ? '<div class="product-badge-low">¡Últimas unidades!</div>' : ''}
+                    ${product.stock < 10 ? '<div class="product-badge-low">Â¡Ãšltimas unidades!</div>' : ''}
                 </div>
                 <div class="product-body-new">
                     <h5 class="product-title-new">${product.name}</h5>
@@ -305,7 +305,7 @@ function loadOffers(products) {
                     <button class="btn btn-offer w-100" 
                         onclick="addToCart(${product.id}, '${product.name.replace(/'/g, "\\'")}', ${product.price})"
                         ${product.stock === 0 ? 'disabled' : ''}>
-                        <i class="fas fa-bolt me-2"></i> ${product.stock === 0 ? 'Agotado' : '¡Comprar Ahora!'}
+                        <i class="fas fa-bolt me-2"></i> ${product.stock === 0 ? 'Agotado' : 'Â¡Comprar Ahora!'}
                     </button>
                 </div>
             </div>
@@ -353,7 +353,7 @@ function filterProducts(category) {
 // ============================================
 async function addToCart(productId, productName, productPrice) {
     if (!authToken) {
-        showAlert('Debes iniciar sesión para agregar productos', 'warning');
+        showAlert('Debes iniciar sesiÃ³n para agregar productos', 'warning');
         new bootstrap.Modal(document.getElementById('loginModal')).show();
         return;
     }
@@ -401,7 +401,7 @@ async function loadCart() {
 
 function showCart() {
     if (!authToken) {
-        showAlert('Debes iniciar sesión para ver el carrito', 'warning');
+        showAlert('Debes iniciar sesiÃ³n para ver el carrito', 'warning');
         new bootstrap.Modal(document.getElementById('loginModal')).show();
         return;
     }
@@ -412,7 +412,7 @@ function showCart() {
         cartContent.innerHTML = `
             <div class="text-center py-5">
                 <i class="fas fa-shopping-cart fs-1 text-muted mb-3"></i>
-                <p class="fs-5 text-muted">Tu carrito está vacío</p>
+                <p class="fs-5 text-muted">Tu carrito estÃ¡ vacÃ­o</p>
             </div>
         `;
     } else {
@@ -480,7 +480,7 @@ function updateCartCount() {
 // ============================================
 function showCheckout() {
     if (cartItems.length === 0) {
-        showAlert('Tu carrito está vacío', 'warning');
+        showAlert('Tu carrito estÃ¡ vacÃ­o', 'warning');
         return;
     }
     
@@ -514,7 +514,7 @@ async function handleCheckout(e) {
         if (response.ok) {
             const order = await response.json();
             
-            showAlert(`¡Pedido #${order.id} creado exitosamente! Total: ${formatPrice(parseFloat(order.total))}`, 'success');
+            showAlert(`Â¡Pedido #${order.id} creado exitosamente! Total: ${formatPrice(parseFloat(order.total))}`, 'success');
             
             const checkoutModal = bootstrap.Modal.getInstance(document.getElementById('checkoutModal'));
             if (checkoutModal) checkoutModal.hide();
