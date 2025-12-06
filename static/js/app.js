@@ -1,5 +1,5 @@
 // ============================================
-// SHOP PARCEROS - JAVASCRIPT CON IMÁGENES REALES
+// SHOP PARCEROS - JAVASCRIPT CORREGIDO
 // ============================================
 
 const API_URL = 'http://127.0.0.1:8000/api';
@@ -204,12 +204,20 @@ function getProductCategory(productName) {
 }
 
 // ============================================
-// PRODUCTOS CON IMÁGENES REALES
+// PRODUCTOS - CORREGIDO PARA RESPUESTA PAGINADA
 // ============================================
 async function loadProducts() {
     try {
         const response = await fetch(`${API_URL}/products/`);
-        const products = await response.json();
+        const data = await response.json();
+        
+        // Manejar respuesta paginada de Django REST Framework
+        const products = data.results || data;
+        
+        if (!Array.isArray(products)) {
+            console.error('La respuesta no es un array:', data);
+            throw new Error('Formato de respuesta inválido');
+        }
         
         displayProducts(products);
         loadOffers(products);
@@ -223,7 +231,7 @@ async function loadProducts() {
 function displayProducts(products) {
     const container = document.getElementById('productsContainer');
     
-    if (products.length === 0) {
+    if (!products || products.length === 0) {
         container.innerHTML = '<div class="col-12"><p class="text-center">No hay productos disponibles</p></div>';
         return;
     }
@@ -260,18 +268,18 @@ function displayProducts(products) {
 }
 
 // ============================================
-// OFERTAS CON IMÁGENES REALES
+// OFERTAS - CORREGIDO
 // ============================================
 function loadOffers(products) {
     const container = document.getElementById('offersContainer');
     
-    const shuffled = [...products].sort(() => 0.5 - Math.random());
-    const offers = shuffled.slice(0, Math.min(10, products.length));
-    
-    if (offers.length === 0) {
+    if (!products || products.length === 0) {
         container.innerHTML = '<div class="col-12"><p class="text-center text-white">No hay ofertas disponibles</p></div>';
         return;
     }
+    
+    const shuffled = [...products].sort(() => 0.5 - Math.random());
+    const offers = shuffled.slice(0, Math.min(10, products.length));
     
     container.innerHTML = offers.map(product => {
         const imageUrl = getProductImage(product.name);

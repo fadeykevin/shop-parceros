@@ -186,23 +186,3 @@ LOGGING = {
         },
     },
 }
-
-# ============================================
-# CONFIGURACIÓN PARA RENDER (PRODUCCIÓN)
-# ============================================
-import os
-
-# Permitir host de Render
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-
-# Configuración de archivos estáticos
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# Seguridad en producción
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
