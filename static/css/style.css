@@ -1,5 +1,5 @@
 ﻿/* ============================================
-   SHOP PARCEROS - DISEÑO COLOMBIANO MEJORADO
+   SHOP PARCEROS - DISEÑO CHILENO PROFESIONAL
    ============================================ */
 
 :root {
@@ -9,9 +9,9 @@
     --danger: #ef4444;
     --dark: #1f2937;
     --light: #f3f4f6;
-    --colombia-amarillo: #FCD116;
-    --colombia-azul: #003893;
-    --colombia-rojo: #CE1126;
+    --chile-azul: #0039A6;
+    --chile-rojo: #D52B1E;
+    --chile-blanco: #FFFFFF;
 }
 
 * {
@@ -30,16 +30,16 @@ body {
    NAVBAR MEJORADO
    ============================================ */
 .navbar-mejorado {
-    background: rgba(0, 0, 0, 0.9) !important;
+    background: rgba(0, 0, 0, 0.95) !important;
     backdrop-filter: blur(15px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-    padding: 1rem 0;
+    padding: 1.2rem 0;
     transition: all 0.3s ease;
 }
 
 .navbar-brand {
     font-weight: 700;
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: white !important;
     transition: transform 0.3s ease;
     display: flex;
@@ -47,14 +47,14 @@ body {
 }
 
 .brand-text {
-    background: linear-gradient(135deg, var(--colombia-amarillo), var(--colombia-rojo));
+    background: linear-gradient(135deg, var(--chile-azul), var(--chile-rojo));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 .bandera-colombia {
-    font-size: 2rem;
+    font-size: 2.5rem;
     animation: wave 2s ease-in-out infinite;
 }
 
@@ -69,53 +69,54 @@ body {
 }
 
 .nav-link-custom {
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     transition: all 0.3s ease;
-    padding: 0.5rem 1rem !important;
-    border-radius: 8px;
+    padding: 0.6rem 1.2rem !important;
+    border-radius: 10px;
 }
 
 .nav-link-custom:hover {
-    color: var(--colombia-amarillo) !important;
-    background: rgba(252, 209, 22, 0.1);
+    color: var(--chile-rojo) !important;
+    background: rgba(213, 43, 30, 0.15);
 }
 
 .cart-badge {
     position: absolute;
     top: -5px;
     right: -5px;
-    font-size: 0.7rem;
-    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
 }
 
 .btn-login {
-    background: linear-gradient(135deg, var(--colombia-amarillo), var(--colombia-rojo));
+    background: linear-gradient(135deg, var(--chile-azul), var(--chile-rojo));
     border: none;
     color: white;
     font-weight: 600;
-    padding: 0.6rem 1.5rem;
-    border-radius: 25px;
+    padding: 0.7rem 1.8rem;
+    border-radius: 30px;
     transition: all 0.3s ease;
-    font-size: 1rem;
+    font-size: 1.05rem;
 }
 
 .btn-login:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(252, 209, 22, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 57, 166, 0.4);
 }
 
 .btn-logout {
     background: var(--danger);
     border: none;
     color: white;
-    border-radius: 20px;
-    padding: 0.4rem 1rem;
+    border-radius: 25px;
+    padding: 0.5rem 1.2rem;
+    font-weight: 600;
 }
 
 /* ============================================
-   HERO SECTION COLOMBIANO
+   HERO SECTION CHILENO
    ============================================ */
 .hero-colombia {
     height: 100vh;
@@ -124,7 +125,7 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
 }
 
 .hero-image {
@@ -133,10 +134,10 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('https://images.unsplash.com/photo-1568632234157-ce7aecd03d0d?w=1920');
+    background-image: url('https://images.unsplash.com/photo-1611348524140-53c9a25263d6?w=1920');
     background-size: cover;
     background-position: center;
-    opacity: 0.3;
+    opacity: 0.25;
     animation: zoomIn 20s ease-in-out infinite alternate;
 }
 
@@ -152,9 +153,8 @@ body {
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg, 
-        rgba(252, 209, 22, 0.3) 0%, 
-        rgba(0, 56, 147, 0.5) 50%, 
-        rgba(206, 17, 38, 0.3) 100%);
+        rgba(0, 57, 166, 0.4) 0%, 
+        rgba(213, 43, 30, 0.4) 100%);
 }
 
 .hero-content {
@@ -162,17 +162,17 @@ body {
     z-index: 2;
     text-align: center;
     color: white;
-    max-width: 900px;
+    max-width: 1000px;
 }
 
 .hero-badge {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(10px);
-    padding: 0.5rem 1.5rem;
+    padding: 0.7rem 2rem;
     border-radius: 50px;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.1rem;
     animation: pulse 2s ease-in-out infinite;
 }
 
@@ -182,31 +182,31 @@ body {
 }
 
 .hero-title {
-    font-size: 4rem;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+    font-size: 4.5rem;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
     line-height: 1.2;
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 1.6rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .btn-hero {
-    background: linear-gradient(135deg, var(--colombia-amarillo) 0%, var(--colombia-rojo) 100%);
+    background: linear-gradient(135deg, var(--chile-azul) 0%, var(--chile-rojo) 100%);
     border: none;
     color: white;
     font-weight: 700;
-    padding: 1rem 3rem;
+    padding: 1.2rem 3.5rem;
     border-radius: 50px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .btn-hero:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(252, 209, 22, 0.5);
+    transform: translateY(-7px);
+    box-shadow: 0 15px 40px rgba(0, 57, 166, 0.5);
 }
 
 .btn-hero-outline {
@@ -214,16 +214,16 @@ body {
     border: 3px solid white;
     color: white;
     font-weight: 700;
-    padding: 1rem 3rem;
+    padding: 1.2rem 3.5rem;
     border-radius: 50px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     transition: all 0.3s ease;
 }
 
 .btn-hero-outline:hover {
     background: white;
     color: var(--primary);
-    transform: translateY(-5px);
+    transform: translateY(-7px);
 }
 
 .hero-features {
@@ -231,21 +231,22 @@ body {
 }
 
 .feature-card {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: 1.5rem;
+    border-radius: 20px;
+    padding: 2rem;
     transition: all 0.3s ease;
 }
 
 .feature-card:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-8px);
 }
 
 .feature-card h5 {
     font-weight: 700;
     margin-bottom: 0.5rem;
+    font-size: 1.3rem;
 }
 
 /* ============================================
@@ -287,7 +288,37 @@ body {
 }
 
 /* ============================================
-   PRODUCTOS
+   FILTROS
+   ============================================ */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.btn-filter {
+    background: white;
+    border: 2px solid #e5e7eb;
+    color: #6b7280;
+    padding: 0.7rem 1.8rem;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.btn-filter.active,
+.btn-filter:hover {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-color: var(--primary);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* ============================================
+   PRODUCTOS MEJORADOS
    ============================================ */
 #productos {
     background: white;
@@ -297,82 +328,248 @@ body {
     z-index: 3;
 }
 
-.product-card {
+.product-card-new {
     background: white;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     transition: all 0.4s ease;
     margin-bottom: 30px;
     border: 2px solid transparent;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-.product-card:hover {
-    transform: translateY(-15px) scale(1.02);
-    box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
-    border-color: var(--colombia-amarillo);
+.product-card-new:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(102, 126, 234, 0.25);
+    border-color: var(--chile-rojo);
 }
 
-.product-image {
-    height: 280px;
+.product-image-new {
+    height: 220px;
     background: linear-gradient(135deg, 
-        var(--colombia-amarillo) 0%, 
-        var(--colombia-azul) 50%,
-        var(--colombia-rojo) 100%);
+        var(--chile-azul) 0%, 
+        var(--primary) 50%,
+        var(--chile-rojo) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 5rem;
+    font-size: 4.5rem;
     color: white;
+    position: relative;
 }
 
-.product-body {
+.product-badge-low {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ef4444;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 25px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.product-body-new {
     padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.product-title {
+.product-title-new {
+    font-size: 1.2rem;
     font-weight: 700;
-    color: var(--dark);
-    margin-bottom: 10px;
-    font-size: 1.3rem;
+    color: #1f2937;
+    margin-bottom: 0.7rem;
+    min-height: 55px;
+    line-height: 1.3;
 }
 
-.product-description {
+.product-description-new {
+    font-size: 0.9rem;
     color: #6b7280;
-    font-size: 0.95rem;
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
+    flex: 1;
+    line-height: 1.5;
 }
 
-.product-price {
-    font-size: 2rem;
+.product-price-new {
+    font-size: 1.8rem;
     font-weight: 700;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: linear-gradient(135deg, var(--chile-azul), var(--chile-rojo));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 15px;
 }
 
-.product-stock {
-    font-size: 0.9rem;
-    color: var(--success);
-    margin-bottom: 15px;
+.product-stock-new {
+    font-size: 0.95rem;
+    color: #10b981;
     font-weight: 600;
 }
 
-.btn-add-cart {
+.btn-add-cart-new {
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     border: none;
     color: white;
     font-weight: 600;
-    padding: 12px 25px;
+    padding: 0.9rem 1.5rem;
     border-radius: 30px;
     transition: all 0.3s ease;
     font-size: 1rem;
+    margin-top: auto;
 }
 
-.btn-add-cart:hover {
+.btn-add-cart-new:hover {
     transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
+}
+
+/* ============================================
+   SECCIÓN OFERTAS
+   ============================================ */
+.bg-ofertas {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.bg-ofertas::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+    animation: float 20s linear infinite;
+}
+
+@keyframes float {
+    from { background-position: 0 0; }
+    to { background-position: 100px 100px; }
+}
+
+.ofertas-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    color: white;
+    font-weight: 700;
+    font-size: 1.4rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.offer-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.offer-card:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 20px 60px rgba(239, 68, 68, 0.4);
+}
+
+.offer-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    z-index: 10;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.offer-image {
+    height: 220px;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4.5rem;
+    color: white;
+}
+
+.offer-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.offer-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.7rem;
+    min-height: 55px;
+    line-height: 1.3;
+}
+
+.offer-description {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    flex: 1;
+}
+
+.offer-prices {
+    margin-bottom: 1rem;
+}
+
+.offer-price-old {
+    font-size: 1.1rem;
+    color: #9ca3af;
+    text-decoration: line-through;
+    margin-right: 0.7rem;
+}
+
+.offer-price-new {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ef4444;
+}
+
+.offer-stock {
+    font-size: 0.95rem;
+    color: #ef4444;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.btn-offer {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    border: none;
+    color: white;
+    font-weight: 700;
+    padding: 1rem 1.5rem;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    margin-top: auto;
+}
+
+.btn-offer:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.6);
 }
 
 /* ============================================
@@ -475,6 +672,12 @@ body {
     border: none;
     font-weight: 600;
     border-radius: 25px;
+    padding: 12px 30px;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(16, 185, 129, 0.4);
 }
 
 .btn-danger {
@@ -491,7 +694,7 @@ footer {
 }
 
 footer a:hover {
-    color: var(--colombia-amarillo) !important;
+    color: var(--chile-rojo) !important;
 }
 
 /* ============================================
@@ -511,17 +714,27 @@ footer a:hover {
     }
     
     .btn-hero {
-        padding: 0.8rem 2rem;
-        font-size: 1rem;
+        padding: 0.9rem 2rem;
+        font-size: 1.1rem;
     }
     
-    .product-image {
-        height: 220px;
+    .product-image-new,
+    .offer-image {
+        height: 180px;
         font-size: 3.5rem;
     }
     
     .bandera-colombia {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
+    }
+    
+    .filter-container {
+        gap: 0.5rem;
+    }
+    
+    .btn-filter {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
     }
 }
 
@@ -549,6 +762,6 @@ footer a:hover {
 }
 
 .alert-warning {
-    background: linear-gradient(135deg, var(--colombia-amarillo) 0%, #f59e0b 100%);
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
     color: white;
 }

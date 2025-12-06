@@ -1,11 +1,35 @@
 // ============================================
-// SHOP PARCEROS - JAVASCRIPT CORREGIDO
+// SHOP PARCEROS - JAVASCRIPT COMPLETO
 // ============================================
 
 const API_URL = 'http://127.0.0.1:8000/api';
 let authToken = localStorage.getItem('authToken');
 let currentUser = localStorage.getItem('currentUser');
 let cartItems = [];
+
+// ============================================
+// MAPEO DE ICONOS POR PRODUCTO
+// ============================================
+const productIcons = {
+    'Laptop': 'fa-laptop',
+    'MacBook': 'fa-laptop-code',
+    'Mouse': 'fa-computer-mouse',
+    'Teclado': 'fa-keyboard',
+    'Monitor': 'fa-desktop',
+    'SSD': 'fa-hard-drive',
+    'Disco': 'fa-hdd',
+    'Pendrive': 'fa-usb-drive',
+    'Audífonos': 'fa-headphones',
+    'Parlante': 'fa-volume-high',
+    'Micrófono': 'fa-microphone',
+    'Webcam': 'fa-video',
+    'Consola': 'fa-gamepad',
+    'Control': 'fa-gamepad',
+    'Silla': 'fa-chair',
+    'Hub': 'fa-plug',
+    'Cable': 'fa-link',
+    'Combo': 'fa-box'
+};
 
 // ============================================
 // INICIALIZACIÓN
@@ -24,22 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
 // EVENT LISTENERS
 // ============================================
 function setupEventListeners() {
-    // Login Form
     document.getElementById('loginForm').addEventListener('submit', handleLogin);
-    
-    // Register Form
     document.getElementById('registerForm').addEventListener('submit', handleRegister);
-    
-    // Logout Button
     document.getElementById('logoutBtn').addEventListener('click', handleLogout);
-    
-    // Cart Button
     document.getElementById('cartBtn').addEventListener('click', showCart);
-    
-    // Checkout Button
     document.getElementById('checkoutBtn').addEventListener('click', showCheckout);
-    
-    // Checkout Form
     document.getElementById('checkoutForm').addEventListener('submit', handleCheckout);
 }
 
@@ -105,11 +118,7 @@ async function handleRegister(e) {
         
         if (response.ok) {
             showAlert('¡Registro exitoso! Ahora puedes iniciar sesión', 'success');
-            
-            // Cambiar a la pestaña de login
             document.querySelector('[href="#loginTab"]').click();
-            
-            // Limpiar formulario
             document.getElementById('registerForm').reset();
         } else {
             const data = await response.json();
@@ -151,6 +160,36 @@ function updateAuthUI() {
 }
 
 // ============================================
+// UTILIDADES
+// ============================================
+function getProductIcon(productName) {
+    for (let [key, icon] of Object.entries(productIcons)) {
+        if (productName.includes(key)) {
+            return icon;
+        }
+    }
+    return 'fa-box';
+}
+
+function formatPrice(price) {
+    return new Intl.NumberFormat('es-CL', {
+        style: 'currency',
+        currency: 'CLP',
+        minimumFractionDigits: 0
+    }).format(price);
+}
+
+function getProductCategory(productName) {
+    const name = productName.toLowerCase();
+    if (name.includes('laptop') || name.includes('macbook')) return 'laptop';
+    if (name.includes('mouse') || name.includes('teclado') || name.includes('combo')) return 'periférico';
+    if (name.includes('monitor')) return 'monitor';
+    if (name.includes('audífonos') || name.includes('parlante') || name.includes('micrófono')) return 'audio';
+    if (name.includes('consola') || name.includes('control') || name.includes('silla')) return 'gaming';
+    return 'otro';
+}
+
+// ============================================
 // PRODUCTOS
 // ============================================
 async function loadProducts() {
@@ -159,6 +198,7 @@ async function loadProducts() {
         const products = await response.json();
         
         displayProducts(products);
+        loadOffers(products);
     } catch (error) {
         console.error('Error al cargar productos:', error);
         document.getElementById('productsContainer').innerHTML = 
@@ -174,28 +214,114 @@ function displayProducts(products) {
         return;
     }
     
-    container.innerHTML = products.map(product => `
-        <div class="col-md-4 col-lg-3">
-            <div class="product-card">
-                <div class="product-image">
-                    <i class="fas fa-laptop"></i>
+    container.innerHTML = products.map(product => {
+        const icon = getProductIcon(product.name);
+        const category = getProductCategory(product.name);
+        
+        return `
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4 product-item" data-category="${category}">
+            <div class="product-card-new">
+                <div class="product-image-new">
+                    <i class="fas ${icon}"></i>
+                    ${product.stock < 10 ? '<div class="product-badge-low">¡Últimas unidades!</div>' : ''}
                 </div>
-                <div class="product-body">
-                    <h5 class="product-title">${product.name}</h5>
-                    <p class="product-description">${product.description}</p>
-                    <div class="product-price">$${parseFloat(product.price).toFixed(2)}</div>
-                    <div class="product-stock">
-                        <i class="fas fa-box"></i> Stock: ${product.stock}
+                <div class="product-body-new">
+                    <h5 class="product-title-new">${product.name}</h5>
+                    <p class="product-description-new">${product.description}</p>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="product-price-new">${formatPrice(product.price)}</div>
+                        <div class="product-stock-new">
+                            <i class="fas fa-box"></i> ${product.stock}
+                        </div>
                     </div>
-                    <button class="btn btn-add-cart w-100" onclick="addToCart(${product.id}, '${product.name}', ${product.price})" 
+                    <button class="btn btn-add-cart-new w-100" 
+                        onclick="addToCart(${product.id}, '${product.name.replace(/'/g, "\\'")}', ${product.price})" 
                         ${product.stock === 0 ? 'disabled' : ''}>
-                        <i class="fas fa-cart-plus"></i> 
-                        ${product.stock === 0 ? 'Sin Stock' : 'Agregar al Carrito'}
+                        <i class="fas fa-cart-plus me-2"></i> 
+                        ${product.stock === 0 ? 'Sin Stock' : 'Agregar'}
                     </button>
                 </div>
             </div>
         </div>
-    `).join('');
+    `}).join('');
+}
+
+// ============================================
+// OFERTAS
+// ============================================
+function loadOffers(products) {
+    const container = document.getElementById('offersContainer');
+    
+    // Seleccionar 10 productos al azar para ofertas
+    const shuffled = [...products].sort(() => 0.5 - Math.random());
+    const offers = shuffled.slice(0, Math.min(10, products.length));
+    
+    container.innerHTML = offers.map(product => {
+        const icon = getProductIcon(product.name);
+        const originalPrice = parseFloat(product.price);
+        const discount = Math.floor(Math.random() * 31) + 20; // 20-50% descuento
+        const salePrice = Math.floor(originalPrice * (1 - discount / 100));
+        
+        return `
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="offer-card">
+                <div class="offer-badge">${discount}% OFF</div>
+                <div class="offer-image">
+                    <i class="fas ${icon}"></i>
+                </div>
+                <div class="offer-body">
+                    <h5 class="offer-title">${product.name}</h5>
+                    <p class="offer-description">${product.description}</p>
+                    <div class="offer-prices">
+                        <span class="offer-price-old">${formatPrice(originalPrice)}</span>
+                        <span class="offer-price-new">${formatPrice(salePrice)}</span>
+                    </div>
+                    <div class="offer-stock mb-3">
+                        <i class="fas fa-fire text-danger"></i> Solo ${product.stock} disponibles
+                    </div>
+                    <button class="btn btn-offer w-100" 
+                        onclick="addToCart(${product.id}, '${product.name.replace(/'/g, "\\'")}', ${product.price})">
+                        <i class="fas fa-bolt me-2"></i> ¡Comprar Ahora!
+                    </button>
+                </div>
+            </div>
+        </div>
+    `}).join('');
+}
+
+// ============================================
+// FILTROS
+// ============================================
+function filterProducts(category) {
+    const items = document.querySelectorAll('.product-item');
+    const buttons = document.querySelectorAll('.btn-filter');
+    
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.closest('.btn-filter').classList.add('active');
+    
+    items.forEach(item => {
+        if (category === 'all') {
+            item.style.display = 'block';
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'scale(1)';
+            }, 10);
+        } else {
+            if (item.dataset.category === category) {
+                item.style.display = 'block';
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'scale(1)';
+                }, 10);
+            } else {
+                item.style.opacity = '0';
+                item.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    item.style.display = 'none';
+                }, 300);
+            }
+        }
+    });
 }
 
 // ============================================
@@ -259,7 +385,12 @@ function showCart() {
     const cartContent = document.getElementById('cartContent');
     
     if (cartItems.length === 0) {
-        cartContent.innerHTML = '<p class="text-center">Tu carrito está vacío</p>';
+        cartContent.innerHTML = `
+            <div class="text-center py-5">
+                <i class="fas fa-shopping-cart fs-1 text-muted mb-3"></i>
+                <p class="fs-5 text-muted">Tu carrito está vacío</p>
+            </div>
+        `;
     } else {
         const total = cartItems.reduce((sum, item) => 
             sum + (parseFloat(item.product.price) * item.quantity), 0
@@ -270,10 +401,10 @@ function showCart() {
                 <div class="cart-item">
                     <div class="cart-item-info">
                         <h5>${item.product.name}</h5>
-                        <p class="mb-0">Cantidad: ${item.quantity}</p>
+                        <p class="mb-0 text-muted">Cantidad: ${item.quantity}</p>
                     </div>
                     <div class="text-end">
-                        <div class="cart-item-price">$${(parseFloat(item.product.price) * item.quantity).toFixed(2)}</div>
+                        <div class="cart-item-price">${formatPrice(parseFloat(item.product.price) * item.quantity)}</div>
                         <button class="btn btn-danger btn-sm mt-2" onclick="removeFromCart(${item.id})">
                             <i class="fas fa-trash"></i> Eliminar
                         </button>
@@ -281,7 +412,7 @@ function showCart() {
                 </div>
             `).join('')}
             <div class="cart-total">
-                <h4>Total: $${total.toFixed(2)}</h4>
+                <h4>Total: ${formatPrice(total)}</h4>
             </div>
         `;
     }
@@ -289,9 +420,6 @@ function showCart() {
     new bootstrap.Modal(document.getElementById('cartModal')).show();
 }
 
-// ============================================
-// FUNCIÓN CORREGIDA: removeFromCart
-// ============================================
 async function removeFromCart(itemId) {
     try {
         const response = await fetch(`${API_URL}/cart/remove/${itemId}/`, {
@@ -301,17 +429,13 @@ async function removeFromCart(itemId) {
         
         if (response.ok) {
             showAlert('Producto eliminado del carrito', 'success');
-            
-            // Esperar a que se actualice el carrito
             await loadCart();
             
-            // Cerrar el modal actual
             const cartModal = bootstrap.Modal.getInstance(document.getElementById('cartModal'));
             if (cartModal) {
                 cartModal.hide();
             }
             
-            // Esperar un poco y volver a abrir con datos actualizados
             setTimeout(() => {
                 showCart();
             }, 300);
@@ -340,7 +464,7 @@ function showCheckout() {
         sum + (parseFloat(item.product.price) * item.quantity), 0
     );
     
-    document.getElementById('totalAmount').textContent = `$${total.toFixed(2)}`;
+    document.getElementById('totalAmount').textContent = formatPrice(total);
     
     const cartModal = bootstrap.Modal.getInstance(document.getElementById('cartModal'));
     if (cartModal) cartModal.hide();
@@ -366,15 +490,12 @@ async function handleCheckout(e) {
         if (response.ok) {
             const order = await response.json();
             
-            showAlert(`¡Pedido #${order.id} creado exitosamente! Total: $${parseFloat(order.total).toFixed(2)}`, 'success');
+            showAlert(`¡Pedido #${order.id} creado exitosamente! Total: ${formatPrice(parseFloat(order.total))}`, 'success');
             
             const checkoutModal = bootstrap.Modal.getInstance(document.getElementById('checkoutModal'));
             if (checkoutModal) checkoutModal.hide();
             
-            // Recargar el carrito desde el servidor
             await loadCart();
-            
-            // Limpiar formulario
             document.getElementById('checkoutForm').reset();
         } else {
             const data = await response.json();
@@ -387,15 +508,16 @@ async function handleCheckout(e) {
 }
 
 // ============================================
-// UTILIDADES
+// ALERTAS
 // ============================================
 function showAlert(message, type) {
     const alertDiv = document.createElement('div');
     alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3`;
     alertDiv.style.zIndex = '9999';
+    alertDiv.style.minWidth = '300px';
     alertDiv.innerHTML = `
         ${message}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
     `;
     
     document.body.appendChild(alertDiv);

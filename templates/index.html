@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Parceros - Tu Tienda Online 🇨🇴</title>
+    <title>Shop Parceros - Tu Tienda Online 🇨🇱</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
@@ -13,9 +13,9 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-mejorado">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <i class="fas fa-shopping-bag me-2"></i>
+                <i class="fas fa-shopping-bag me-2 fs-3"></i>
                 <span class="brand-text">Shop Parceros</span>
-                <span class="bandera-colombia ms-2">🇨🇴</span>
+                <span class="bandera-colombia ms-2">🇨🇱</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -25,6 +25,11 @@
                     <li class="nav-item">
                         <a class="nav-link nav-link-custom" href="#productos">
                             <i class="fas fa-box-open me-1"></i> Productos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#ofertas">
+                            <i class="fas fa-fire me-1"></i> Ofertas
                         </a>
                     </li>
                     <li class="nav-item">
@@ -54,26 +59,26 @@
         </div>
     </nav>
 
-    <!-- Hero Section con Imagen Colombiana -->
+    <!-- Hero Section Chileno -->
     <section class="hero hero-colombia">
         <div class="hero-overlay"></div>
         <div class="hero-image"></div>
         <div class="container hero-content">
             <div class="hero-badge mb-3">
-                <i class="fas fa-star"></i> Hecho en Colombia 🇨🇴
+                <i class="fas fa-star"></i> Hecho en Chile 🇨🇱
             </div>
             <h1 class="display-2 fw-bold mb-4 animate-fade-in hero-title">
                 Bienvenido a Shop Parceros
             </h1>
             <p class="lead mb-5 animate-fade-in-delay hero-subtitle">
-                Los mejores productos tecnológicos al mejor precio
+                Los mejores productos tecnológicos de Chile al mejor precio
             </p>
             <div class="d-flex gap-3 justify-content-center flex-wrap">
                 <a href="#productos" class="btn btn-hero btn-lg animate-bounce">
                     <i class="fas fa-shopping-cart me-2"></i>Ver Productos
                 </a>
-                <a href="#productos" class="btn btn-hero-outline btn-lg">
-                    <i class="fas fa-tags me-2"></i>Ofertas
+                <a href="#ofertas" class="btn btn-hero-outline btn-lg">
+                    <i class="fas fa-fire me-2"></i>Ver Ofertas
                 </a>
             </div>
             
@@ -83,21 +88,21 @@
                     <div class="feature-card">
                         <i class="fas fa-shipping-fast fs-2 mb-2"></i>
                         <h5>Envío Gratis</h5>
-                        <p class="small">En compras sobre $100.000</p>
+                        <p class="small">En compras sobre $100.000 CLP</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <div class="feature-card">
                         <i class="fas fa-shield-alt fs-2 mb-2"></i>
                         <h5>Compra Segura</h5>
-                        <p class="small">Protección total</p>
+                        <p class="small">Protección total garantizada</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <div class="feature-card">
                         <i class="fas fa-headset fs-2 mb-2"></i>
                         <h5>Soporte 24/7</h5>
-                        <p class="small">Siempre disponibles</p>
+                        <p class="small">Siempre disponibles para ti</p>
                     </div>
                 </div>
             </div>
@@ -108,11 +113,34 @@
     <section id="productos" class="py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="display-5 fw-bold">
-                    <i class="fas fa-box-open text-primary"></i> Nuestros Productos
+                <h2 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-box-open text-primary"></i> Catálogo de Productos
                 </h2>
-                <p class="text-muted">Calidad y precio en tecnología</p>
+                <p class="text-muted fs-5">Tecnología de última generación</p>
+                
+                <!-- Filtros por categoría -->
+                <div class="filter-container mt-4 mb-5">
+                    <button class="btn btn-filter active" onclick="filterProducts('all')">
+                        <i class="fas fa-th"></i> Todos
+                    </button>
+                    <button class="btn btn-filter" onclick="filterProducts('laptop')">
+                        <i class="fas fa-laptop"></i> Laptops
+                    </button>
+                    <button class="btn btn-filter" onclick="filterProducts('periférico')">
+                        <i class="fas fa-mouse"></i> Periféricos
+                    </button>
+                    <button class="btn btn-filter" onclick="filterProducts('monitor')">
+                        <i class="fas fa-desktop"></i> Monitores
+                    </button>
+                    <button class="btn btn-filter" onclick="filterProducts('audio')">
+                        <i class="fas fa-headphones"></i> Audio
+                    </button>
+                    <button class="btn btn-filter" onclick="filterProducts('gaming')">
+                        <i class="fas fa-gamepad"></i> Gaming
+                    </button>
+                </div>
             </div>
+            
             <div class="row" id="productsContainer">
                 <!-- Los productos se cargan aquí dinámicamente -->
                 <div class="col-12 text-center">
@@ -120,6 +148,25 @@
                         <span class="visually-hidden">Cargando...</span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de OFERTAS -->
+    <section id="ofertas" class="py-5 bg-ofertas">
+        <div class="container">
+            <div class="text-center mb-5">
+                <div class="ofertas-badge mb-3">
+                    <i class="fas fa-fire me-2"></i> ¡OFERTAS IMPERDIBLES! <i class="fas fa-fire ms-2"></i>
+                </div>
+                <h2 class="display-5 fw-bold text-white mb-3">
+                    Descuentos de hasta 50%
+                </h2>
+                <p class="text-white fs-5">Aprovecha estas ofertas por tiempo limitado</p>
+            </div>
+            
+            <div class="row" id="offersContainer">
+                <!-- Las ofertas se cargan aquí dinámicamente -->
             </div>
         </div>
     </section>
@@ -132,7 +179,7 @@
                     <h5 class="modal-title">
                         <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs mb-3" role="tablist">
@@ -148,11 +195,11 @@
                         <div class="tab-pane fade show active" id="loginTab">
                             <form id="loginForm">
                                 <div class="mb-3">
-                                    <label class="form-label">Usuario</label>
+                                    <label class="form-label fw-bold">Usuario</label>
                                     <input type="text" class="form-control" id="loginUsername" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Contraseña</label>
+                                    <label class="form-label fw-bold">Contraseña</label>
                                     <input type="password" class="form-control" id="loginPassword" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100">
@@ -164,19 +211,19 @@
                         <div class="tab-pane fade" id="registerTab">
                             <form id="registerForm">
                                 <div class="mb-3">
-                                    <label class="form-label">Usuario</label>
+                                    <label class="form-label fw-bold">Usuario</label>
                                     <input type="text" class="form-control" id="regUsername" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Email</label>
+                                    <label class="form-label fw-bold">Email</label>
                                     <input type="email" class="form-control" id="regEmail" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Contraseña</label>
+                                    <label class="form-label fw-bold">Contraseña</label>
                                     <input type="password" class="form-control" id="regPassword" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Confirmar Contraseña</label>
+                                    <label class="form-label fw-bold">Confirmar Contraseña</label>
                                     <input type="password" class="form-control" id="regPassword2" required>
                                 </div>
                                 <button type="submit" class="btn btn-success w-100">
@@ -192,21 +239,23 @@
 
     <!-- Modal Carrito -->
     <div class="modal fade" id="cartModal" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        <i class="fas fa-shopping-cart"></i> Mi Carrito
+                        <i class="fas fa-shopping-cart"></i> Mi Carrito de Compras
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body" id="cartContent">
                     <!-- Contenido del carrito -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Cerrar
+                    </button>
                     <button type="button" class="btn btn-success" id="checkoutBtn">
-                        <i class="fas fa-check"></i> Finalizar Compra
+                        <i class="fas fa-credit-card"></i> Finalizar Compra
                     </button>
                 </div>
             </div>
@@ -221,17 +270,18 @@
                     <h5 class="modal-title">
                         <i class="fas fa-shipping-fast"></i> Finalizar Pedido
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <form id="checkoutForm">
                         <div class="mb-3">
-                            <label class="form-label">Dirección de Envío</label>
+                            <label class="form-label fw-bold">Dirección de Envío</label>
                             <textarea class="form-control" id="shippingAddress" rows="3" required 
-                                placeholder="Ej: Calle 100 #15-20, Bogotá, Colombia"></textarea>
+                                placeholder="Ej: Av. Providencia 1234, Santiago, Chile"></textarea>
                         </div>
                         <div class="alert alert-info">
-                            <strong>Total a pagar:</strong> <span id="totalAmount">$0</span>
+                            <strong><i class="fas fa-info-circle"></i> Total a pagar:</strong> 
+                            <span id="totalAmount" class="fs-4 fw-bold">$0</span>
                         </div>
                         <button type="submit" class="btn btn-success w-100">
                             <i class="fas fa-check-circle"></i> Confirmar Pedido
@@ -246,18 +296,18 @@
     <footer class="bg-dark text-white py-4 mt-5">
         <div class="container text-center">
             <p class="mb-2">
-                <i class="fas fa-heart text-danger"></i> Shop Parceros 2025 - Hecho con orgullo en Colombia 🇨🇴
+                <i class="fas fa-heart text-danger"></i> Shop Parceros 2025 - Hecho con orgullo en Chile 🇨🇱
             </p>
-            <p class="mb-2">Desarrollado por Kevin Fadey</p>
+            <p class="mb-2 fw-bold">Desarrollado por Kevin Fadey</p>
             <p class="mb-0">
                 <a href="https://github.com/fadeykevin/shop-parceros" class="text-white text-decoration-none me-3" target="_blank">
                     <i class="fab fa-github"></i> GitHub
                 </a>
                 <a href="/swagger/" class="text-white text-decoration-none me-3">
-                    <i class="fas fa-code"></i> API
+                    <i class="fas fa-code"></i> API Docs
                 </a>
                 <a href="/admin/" class="text-white text-decoration-none">
-                    <i class="fas fa-cog"></i> Admin
+                    <i class="fas fa-cog"></i> Admin Panel
                 </a>
             </p>
         </div>
